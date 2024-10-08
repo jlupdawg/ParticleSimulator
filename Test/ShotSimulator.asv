@@ -1,0 +1,64 @@
+classdef ShotSimulator <handle
+
+    properties
+        Queue Shot
+        limit = 10
+        f matlab.ui.Figure
+        ax matlab.graphics.axis.Axes
+    end
+
+    methods
+
+        function obj = ShotSimulator()
+            obj.Queue(obj.limit) = Shot();
+
+            obj.f = figure;
+            obj.ax = axes(obj.f);
+            grid(obj.ax, 'on')
+        end
+
+        function SetShot(obj, type)
+            idx = find([obj.Queue.type] == "UNUSED", 1, 'first');
+
+            disp(idx)
+
+            if(~isempty(idx))
+                obj.Queue(idx).setType(type)
+            end
+        end
+
+        function Run(obj)
+            x = [-1 -1 1 1]*10;
+            y = [-1 1 1 -1]*10;
+            patches  = repmat(patch(x, y, 'r', 'LineStyle', 'none', 'FaceColor', 'none'), obj.limit, 1);
+            this_time = toc;
+            last_time = toc;
+            while true
+                
+                
+                this_time = toc;
+                for i = 1:obj.limit
+                    dt = this_time - last_time;
+                    
+                    if(this_time - obj.Queue(i).startTime > 5000)
+                        obj.Queue(i).setType("UNUSED");
+                    end
+
+
+
+
+
+                
+
+                end
+                last_time = this_time;
+
+                xlim([0 500])
+                ylim([0 200])
+                axis equal
+                drawnow
+            end
+        end
+    end
+end
+

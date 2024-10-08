@@ -1,0 +1,8 @@
+clc; clear; close all
+
+h_fig = figure;
+set(h_fig,'KeyPressFcn',@myfun);
+
+function myfun(~, event)
+   disp(event.Key);
+end

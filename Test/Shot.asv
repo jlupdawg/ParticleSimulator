@@ -1,0 +1,27 @@
+classdef Shot
+    properties
+        particle
+        type
+        startTime
+    end
+
+    methods
+        function obj = Shot(type)
+            obj.particle = Particle(Vector3([0 0 0]), Vector3([0 0 0]), Vector3([0 0 0]), 0);
+
+            switch(type)
+
+                case PISTOL
+                    obj.particle.inverseMass = 1/2;
+
+            end
+        end
+
+        function outputArg = method1(obj,inputArg)
+            %METHOD1 Summary of this method goes here
+            %   Detailed explanation goes here
+            outputArg = obj.Property1 + inputArg;
+        end
+    end
+end
+
